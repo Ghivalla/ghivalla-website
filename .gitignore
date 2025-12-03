@@ -41,4 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # project notes (local only)
+CLAUDE.md
 /notes
+
+

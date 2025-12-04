@@ -14,6 +14,9 @@
       // Setup file to run before all tests
       setupFiles: './vitest.setup.ts',
 
+      // Exclude E2E tests (Playwright) from Vitest
+      exclude: ['node_modules', 'e2e/**'],
+
       // Coverage configuration
       coverage: {
         provider: 'v8',

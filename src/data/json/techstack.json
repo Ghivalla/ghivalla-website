@@ -49,6 +49,10 @@
       "category": "testing"
     },
     {
+      "name": "Node.js",
+      "category": "backend"
+    },
+    {
       "name": "Playwright",
       "category": "testing"
     }

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
-export function Hero() {
+export default function Hero() {
     return (
         <section className="container relative mx-auto px-4 py-20 min-h-screen flex flex-col justify-center">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Navigation } from "./navigation";
+import Navigation from "./Navigation";
 
 describe("navigation", () => {
     it("renders without crashing", () => {

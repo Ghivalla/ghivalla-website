@@ -1,5 +1,5 @@
 import { screen, render } from "@testing-library/react";
-import { Hero } from "./hero";
+import Hero from "./Hero";
 
 describe("Hero", () => {
     it("renders without crashing", () => {

@@ -1,0 +1,56 @@
+{
+  "technologies": [
+    {
+      "name": "HTML5",
+      "category": "frontend"
+    },
+    {
+      "name": "CSS3",
+      "category": "frontend"
+    },
+    {
+      "name": "JavaScript",
+      "category": "frontend"
+    },
+    {
+      "name": "TypeScript",
+      "category": "frontend"
+    },
+    {
+      "name": "React",
+      "category": "frontend"
+    },
+    {
+      "name": "Next.js",
+      "category": "frontend"
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "styling"
+    },
+    {
+      "name": "Git",
+      "category": "tools"
+    },
+    {
+      "name": "GitHub",
+      "category": "tools"
+    },
+    {
+      "name": "VS Code",
+      "category": "tools"
+    },
+    {
+      "name": "Figma",
+      "category": "design"
+    },
+    {
+      "name": "Vitest",
+      "category": "testing"
+    },
+    {
+      "name": "Playwright",
+      "category": "testing"
+    }
+  ]
+}

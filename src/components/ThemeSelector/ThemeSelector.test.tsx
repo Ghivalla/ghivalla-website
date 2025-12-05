@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { ThemeSelector } from "./theme-selector";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeSelector } from "./ThemeSelector";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import userEvent from "@testing-library/user-event";
 import { useTheme } from "next-themes";
 import { vi, type Mock } from "vitest";

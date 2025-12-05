@@ -1,4 +1,3 @@
-import { ThemeSelector } from "@/components/theme-selector";
 
 export default function Home() {
     return (
@@ -10,16 +9,6 @@ export default function Home() {
                     This is your portfolio homepage.
                 </p>
             </main>
-
-            {/* Footer with ThemeSelector */}
-            <footer className="border-t border-zinc-200 dark:border-zinc-800">
-                <div className="container mx-auto px-4 py-6 flex items-center justify-between">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                        © 2025 Ghivalla
-                    </p>
-                    <ThemeSelector />
-                </div>
-            </footer>
         </div>
     );
 }

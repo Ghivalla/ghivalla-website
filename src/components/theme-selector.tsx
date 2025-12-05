@@ -50,7 +50,7 @@ export function ThemeSelector() {
                         aria-checked={theme === role}
                         onClick={() => changeTheme(role)}
                         key={role}
-                        className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-300 ${theme === role ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900 pointer-events-none' : 'text-zinc-700 dark:text-zinc-400'}`} 
+                        className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-500 ${theme === role ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900 pointer-events-none' : 'text-zinc-700 dark:text-zinc-400'}`} 
                     >
                         <Icon size={18}/>
                         <span className="sr-only">{role}</span>

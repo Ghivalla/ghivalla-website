@@ -1,0 +1,44 @@
+{
+  "timeline": [
+    {
+      "id": "beyable",
+      "role": "Front-End Developer",
+      "company": "Beyable",
+      "dateRange": "June 2021 - August 2024",
+      "current": false,
+      "highlights": [
+        "Contributed to building and growing the IT-Client department from a single position to a team of four people"
+      ]
+    },
+    {
+      "id": "doranco",
+      "role": "Student",
+      "company": "Doranco",
+      "dateRange": "January 2020 - June 2020",
+      "current": false,
+      "highlights": [
+        "Training in graphic design and page layout for both web and print media"
+      ]
+    },
+    {
+      "id": "aircall",
+      "role": "Front-End Developer Intern",
+      "company": "Aircall",
+      "dateRange": "August 2019 - January 2020",
+      "current": false,
+      "highlights": [
+        "Worked on the marketing website of a French unicorn company"
+      ]
+    },
+    {
+      "id": "epitech",
+      "role": "Student",
+      "company": "Epitech",
+      "dateRange": "January 2019 - January 2020",
+      "current": false,
+      "highlights": [
+        "Intensive coding bootcamp focused on web development"
+      ]
+    }
+  ]
+}

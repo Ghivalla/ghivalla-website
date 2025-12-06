@@ -1,6 +1,6 @@
-import { ThemeSelector } from "@/components/theme-selector";
+import { ThemeSelector } from "@/components/ThemeSelector";
 import { Github, Linkedin, Mail } from "lucide-react";
-export function Footer() {
+export default function Footer() {
     const currentYear = new Date().getFullYear();
     const socialLinks = [
         { label: "GitHub", href:"https://github.com/ghivalla", icon: Github },

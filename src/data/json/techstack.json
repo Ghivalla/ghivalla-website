@@ -1,0 +1,84 @@
+{
+  "technologies": [
+    {
+      "name": "HTML5",
+      "category": "frontend"
+    },
+    {
+      "name": "CSS3",
+      "category": "frontend"
+    },
+    {
+      "name": "JavaScript",
+      "category": "frontend"
+    },
+    {
+      "name": "TypeScript",
+      "category": "frontend"
+    },
+    {
+      "name": "React",
+      "category": "frontend"
+    },
+    {
+      "name": "Next.js",
+      "category": "frontend"
+    },
+    {
+      "name": "Nuxt.js",
+      "category": "frontend"
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "styling"
+    },
+    {
+      "name": "Git",
+      "category": "tools"
+    },
+    {
+      "name": "GitHub",
+      "category": "tools"
+    },
+    {
+      "name": "Vim",
+      "category": "tools"
+    },
+    {
+      "name": "Docker",
+      "category": "devops"
+    },
+    {
+      "name": "Linux",
+      "category": "operating system"
+    },
+    {
+      "name": "Figma",
+      "category": "design"
+    },
+    {
+      "name": "Vitest",
+      "category": "testing"
+    },
+    {
+      "name": "Node.js",
+      "category": "backend"
+    },
+    {
+      "name": "Wordpress",
+      "category": "cms"
+    },
+    {
+      "name": "Contentful",
+      "category": "cms"
+    },
+    {
+      "name": "Nginx",
+      "category": "backend"
+    },
+    {
+      "name": "Playwright",
+      "category": "testing"
+    }
+  ]
+}

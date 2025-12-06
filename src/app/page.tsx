@@ -1,6 +1,7 @@
 
 import Hero from '@/components/sections/Hero';
 import TechStack from '@/components/TechStack';
+import About from '@/components/About';
 
 export default function Home() {
     return (
@@ -8,6 +9,7 @@ export default function Home() {
             <main className="flex-1">
                 <Hero />
                 <TechStack />
+                <About />
             </main>
         </div>
     );

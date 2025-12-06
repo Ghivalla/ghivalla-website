@@ -1,0 +1,17 @@
+{
+  "name": "Ghivalla Soumar",
+  "title": "Front-End Developer",
+  "bio": "I'm a front-end developer driven by the intersection of technology, design, and creativity. I love crafting elegant, fluid experiences that bring real value to users. What sets me apart is this combination: the creativity of an artist, the logic of a developer, and the hunger to learn of a true autodidact. I don't just code to build, I code to understand, to improve, and to give life to something meaningful.",
+  "differentiator": "What sets me apart is this combination: the creativity of an artist, the logic of a developer, and the hunger to learn of a true autodidact. I don't just code to build—I code to understand, to improve, and to give life to something that didn't exist just moments before.",
+  "motto": "Curiosity built my path, passion keeps me on it.",
+  "cta": {
+    "label": "Download Resume",
+    "href": "/ghivalla-soumar-resume.pdf",
+    "type": "download",
+    "icon": "Download"
+  },
+  "image": {
+    "src": "/images/about.webp",
+    "alt": "Ghivalla Soumar - Front-End Developer"
+  }
+}

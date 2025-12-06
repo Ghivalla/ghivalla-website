@@ -25,6 +25,10 @@
       "category": "frontend"
     },
     {
+      "name": "Nuxt.js",
+      "category": "frontend"
+    },
+    {
       "name": "Tailwind CSS",
       "category": "styling"
     },
@@ -37,8 +41,16 @@
       "category": "tools"
     },
     {
-      "name": "VS Code",
+      "name": "Vim",
       "category": "tools"
+    },
+    {
+      "name": "Docker",
+      "category": "devops"
+    },
+    {
+      "name": "Linux",
+      "category": "operating system"
     },
     {
       "name": "Figma",
@@ -50,6 +62,18 @@
     },
     {
       "name": "Node.js",
+      "category": "backend"
+    },
+    {
+      "name": "Wordpress",
+      "category": "cms"
+    },
+    {
+      "name": "Contentful",
+      "category": "cms"
+    },
+    {
+      "name": "Nginx",
       "category": "backend"
     },
     {

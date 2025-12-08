@@ -151,16 +151,6 @@ export default function Contact() {
                         </p>
                     </div>
 
-                    <div className="min-h-[60px]">
-                        {statusMessage && (
-                            <div
-                                className={`p-4 rounded-lg border-l-4 ${statusMessage.includes("successfully") ? "bg-green-50 dark:bg-green-900/20 border-green-500 text-green-800 dark:text-green-200" : "bg-red-50 dark:bg-red-900/20 border-red-500 text-red-800 dark:text-red-200"}`}
-                            >
-                                <p className="text-body">{statusMessage}</p>
-                            </div>
-                        )}
-                    </div>
-
                     <button
                         type="submit"
                         onClick={handleSubmit}
@@ -180,6 +170,16 @@ export default function Contact() {
                         onChange={(e) => setWebsite(e.target.value)}
                         aria-label="website"
                     />
+
+                    <div className="min-h-[60px]">
+                        {statusMessage && (
+                            <div
+                                className={`p-4 rounded-lg border-l-4 ${statusMessage.includes("successfully") ? "bg-green-50 dark:bg-green-900/20 border-green-500 text-green-800 dark:text-green-200" : "bg-red-50 dark:bg-red-900/20 border-red-500 text-red-800 dark:text-red-200"}`}
+                            >
+                                <p className="text-body">{statusMessage}</p>
+                            </div>
+                        )}
+                    </div>
                 </form>
             )}
         </section>

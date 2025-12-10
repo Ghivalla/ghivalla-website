@@ -151,6 +151,18 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  /* Smooth scroll behavior (respects user preference for reduced motion) */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
   }

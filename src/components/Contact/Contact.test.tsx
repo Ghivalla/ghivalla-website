@@ -39,6 +39,30 @@ describe("Contact Component", () => {
         expect(await screen.findByText("Message is required")).toBeInTheDocument();
     });
 
+    it("shows error when name is less than 2 characters", async () => {
+        const user = userEvent.setup();
+        render(<Contact />);
+        const nameInput = screen.getByLabelText("Name");
+        const submitButton = screen.getByRole("button", { name: "Submit" });
+
+        await user.type(nameInput, "A");
+        await user.click(submitButton);
+
+        expect(await screen.findByText("Name must be at least 2 characters")).toBeInTheDocument();
+    });
+
+    it("shows error when message is less than 10 characters", async () => {
+        const user = userEvent.setup();
+        render(<Contact />);
+        const messageInput = screen.getByLabelText("Message");
+        const submitButton = screen.getByRole("button", { name: "Submit" });
+
+        await user.type(messageInput, "Short");
+        await user.click(submitButton);
+
+        expect(await screen.findByText("Message must be at least 10 characters")).toBeInTheDocument();
+    });
+
     it("disables submit button during submission", async () => {
         const user = userEvent.setup();
         global.fetch = vi.fn().mockImplementation(() => {
@@ -76,7 +100,11 @@ describe("Contact Component", () => {
                     () =>
                         resolve({
                             ok: false,
-                            json: async () => ({ error: "server error" }),
+                            status: 500,
+                            json: async () => ({
+                                success: false,
+                                message: "Failed to send email",
+                            }),
                         } as Response),
                     100,
                 ),
@@ -98,9 +126,9 @@ describe("Contact Component", () => {
         expect(submitButton).toBeDisabled();
         await waitFor(() => expect(submitButton).not.toBeDisabled());
 
-        // Error message is shown
+        // Error message is shown (from API response)
         expect(
-            await screen.findByText("Failed to send message"),
+            await screen.findByText("Failed to send email"),
         ).toBeInTheDocument();
 
         // Form is still visible
@@ -115,7 +143,11 @@ describe("Contact Component", () => {
                     () =>
                         resolve({
                             ok: true,
-                            json: async () => ({ success: true }),
+                            status: 200,
+                            json: async () => ({
+                                success: true,
+                                message: "Email sent successfully",
+                            }),
                         } as Response),
                     100,
                 ),
@@ -133,9 +165,9 @@ describe("Contact Component", () => {
         await user.type(messageInput, "Hello, this is a test message.");
         await user.click(submitButton);
 
-        // 1. Success message appears
+        // 1. Success message appears (from API response)
         expect(
-            await screen.findByText("Message sent successfully"),
+            await screen.findByText("Email sent successfully"),
         ).toBeInTheDocument();
 
         // 2. Form is hidden (email input should NOT be visible)

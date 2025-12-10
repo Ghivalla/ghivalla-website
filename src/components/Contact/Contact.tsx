@@ -1,6 +1,12 @@
 "use client";
 import { useState } from "react";
 
+type ContactFormErrors = {
+    name?: string;
+    email?: string;
+    message?: string;
+};
+
 export default function Contact() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -8,7 +14,8 @@ export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [statusMessage, setStatusMessage] = useState("");
     const [showForm, setShowForm] = useState(true);
-    const [errors, setErrors] = useState<{ email?: string; message?: string }>({
+    const [errors, setErrors] = useState<ContactFormErrors>({
+        name: "",
         email: "",
         message: "",
     });
@@ -22,21 +29,45 @@ export default function Contact() {
 
     const checkFormIsValid = () => {
         let isValid = true;
-        const newErrors: { email?: string; message?: string } = {
+        const newErrors : ContactFormErrors = {
+            name: "",
             email: "",
             message: "",
         };
 
+        // Validate name (2-100 characters)
+        if (!name) {
+            newErrors.name = "Name is required";
+            isValid = false;
+        } else if (name.length < 2) {
+            newErrors.name = "Name must be at least 2 characters";
+            isValid = false;
+        } else if (name.length > 100) {
+            newErrors.name = "Name must not exceed 100 characters";
+            isValid = false;
+        }
+
+        // Validate email (valid format, max 254 characters)
         if (!email) {
             newErrors.email = "Email is required";
             isValid = false;
         } else if (!isValidEmail(email)) {
             newErrors.email = "Please enter a valid email";
             isValid = false;
+        } else if (email.length > 254) {
+            newErrors.email = "Email must not exceed 254 characters";
+            isValid = false;
         }
 
+        // Validate message (10-5000 characters)
         if (!message) {
             newErrors.message = "Message is required";
+            isValid = false;
+        } else if (message.length < 10) {
+            newErrors.message = "Message must be at least 10 characters";
+            isValid = false;
+        } else if (message.length > 5000) {
+            newErrors.message = "Message must not exceed 5000 characters";
             isValid = false;
         }
 
@@ -58,17 +89,45 @@ export default function Contact() {
                     body: JSON.stringify({ name, email, message }),
                 });
 
+                const data = await response.json();
+
                 if (!response.ok) {
-                    throw new Error("Failed to send message");
+                    // Handle different error status codes
+                    if (response.status === 429) {
+                        // Rate limit error
+                        setStatusMessage(data.message || "Too many requests from this IP, please try again later.");
+                    } else if (response.status === 400) {
+                        // Validation error - parse field-specific errors
+                        if (data.errors && Array.isArray(data.errors)) {
+                            const newErrors: ContactFormErrors = {
+                                name: "",
+                                email: "",
+                                message: "",
+                            };
+                            data.errors.forEach((error: { field: string; message: string }) => {
+                                if (error.field in newErrors) {
+                                    newErrors[error.field as keyof ContactFormErrors] = error.message;
+                                }
+                            });
+                            setErrors(newErrors);
+                            setStatusMessage(""); // Clear status message, errors are shown per field
+                        } else {
+                            setStatusMessage(data.message || "Validation error. Please check your inputs.");
+                        }
+                    } else {
+                        // Server error (500) or other errors
+                        setStatusMessage(data.message || "Failed to send email");
+                    }
+                    return;
                 }
 
-                const data = await response.json();
+                // Success response (200)
                 console.log("Success:", data);
-                setStatusMessage("Message sent successfully");
+                setStatusMessage(data.message || "Message sent successfully");
                 setShowForm(false);
             } catch (error) {
                 console.error("Error:", error);
-                setStatusMessage("Failed to send message");
+                setStatusMessage("Failed to send message. Please try again.");
             } finally {
                 setIsSubmitting(false);
             }
@@ -81,7 +140,7 @@ export default function Contact() {
         setName("");
         setEmail("");
         setMessage("");
-        setErrors({ email: "", message: "" });
+        setErrors({ name: "", email: "", message: "" });
     };
 
     return (
@@ -114,9 +173,11 @@ export default function Contact() {
                             name="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.name ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
                         />
-                        <div className="min-h-[20px]"></div>
+                        <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
+                            {errors.name}
+                        </p>
                     </div>
                     <div className="space-y-2">
                         <label htmlFor="email" className="text-body font-medium">
@@ -157,7 +218,7 @@ export default function Contact() {
                         disabled={isSubmitting}
                         className="w-full md:w-fit px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     >
-                        Submit
+                        {isSubmitting ? "Sending..." : "Submit"}
                     </button>
 
                     <input

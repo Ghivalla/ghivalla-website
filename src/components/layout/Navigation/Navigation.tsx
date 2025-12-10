@@ -23,7 +23,7 @@ export default function Navigation() {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
     return (
-        <header className="border-b border-zinc-200 dark:border-zinc-800">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-zinc-200 dark:border-zinc-800">
             <nav aria-label="Main navigation" className="min-h-[72px] flex flex-row justify-between items-center container mx-auto py-4 px-4">
                 <div>
                     <a href="/" className="text-body-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-500 rounded-md px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors font-semibold">
@@ -55,7 +55,7 @@ export default function Navigation() {
                     <motion.ul
                         aria-label="Mobile menu"
                         aria-hidden={!isMenuOpen}
-                        className="list-none fixed top-0 right-0 h-screen w-[85vw] max-w-sm bg-white dark:bg-zinc-950 border-l border-zinc-200 dark:border-zinc-800 flex flex-col gap-6 p-6 z-50 md:static md:w-auto md:max-w-none md:h-auto md:flex-row md:gap-6 md:p-0 md:bg-transparent md:border-0"
+                        className="list-none fixed top-0 right-0 h-screen w-[85vw] max-w-sm bg-background border-l border-zinc-200 dark:border-zinc-800 flex flex-col gap-6 p-6 z-50 md:static md:w-auto md:max-w-none md:h-auto md:flex-row md:gap-6 md:p-0 md:bg-transparent md:border-0"
                         animate={isMobile ? { x: isMenuOpen ? 0 : '100%' } : { x: 0 }}
                         initial={isMobile ? { x: '100%' } : { x: 0 }}
                         transition={isMobile ? { type: 'tween', duration: 0.3 } : {}}

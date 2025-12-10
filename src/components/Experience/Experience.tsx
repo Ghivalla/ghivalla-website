@@ -20,11 +20,11 @@ export default function Experience() {
                                 className="relative md:grid md:grid-cols-2 md:gap-16"
                             >
                                 {/* Timeline dot */}
-                                <div className="absolute left-0 top-2 -translate-x-1/2 md:left-1/2 w-4 h-4 rounded-full border-2 border-blue-500 bg-white dark:bg-zinc-950" />
+                                <div className="absolute left-0 top-2 -translate-x-1/2 md:left-1/2 w-4 h-4 rounded-full border-2 border-blue-500 bg-background" />
 
                                 {/* Line stopper - hides line below last dot */}
                                 {isLast && (
-                                    <div className="absolute left-0 md:left-1/2 top-6 bottom-0 w-1 -translate-x-1/2 bg-white dark:bg-zinc-950" />
+                                    <div className="absolute left-0 md:left-1/2 top-6 bottom-0 w-1 -translate-x-1/2 bg-background" />
                                 )}
 
                             {/* Content card with max-width and visual grouping */}

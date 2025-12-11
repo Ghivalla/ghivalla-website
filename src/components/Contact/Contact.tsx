@@ -83,7 +83,7 @@ export default function Contact() {
         if (formIsValid) {
             try {
                 setIsSubmitting(true);
-                const response = await fetch("/api/contact", {
+                const response = await fetch("http://localhost:4000/contact", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, email, message }),

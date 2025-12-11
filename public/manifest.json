@@ -1,0 +1,22 @@
+{
+  "name": "Ghivalla Soumar - Front-End Developer Portfolio",
+  "short_name": "Ghivalla",
+  "description": "Front-end developer specializing in JavaScript, TypeScript, and modern web technologies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

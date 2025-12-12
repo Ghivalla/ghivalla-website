@@ -14,6 +14,7 @@ export default function Experience() {
                     {experienceData.timeline.map((entry, index) => {
                         const isLeft = index % 2 === 0;
                         const isLast = index === experienceData.timeline.length - 1;
+
                         return (
                             <div
                                 key={entry.id}
@@ -29,7 +30,7 @@ export default function Experience() {
 
                             {/* Content card with max-width and visual grouping */}
                             <div className={`pl-8 md:pl-0 max-w-md ${isLeft ? 'md:col-start-1 md:pr-8 md:ml-auto' : 'md:col-start-2 md:pl-8'}`}>
-                                <div className="p-6 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 md:border md:border-zinc-200 md:dark:border-zinc-800">
+                                <div className="p-6 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 md:border md:border-zinc-200 md:dark:border-zinc-800 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                                     <h3 className="text-h3 mb-1 text-left">{entry.role}</h3>
                                     <p className="text-body text-zinc-600 dark:text-zinc-400 mb-1 text-left">{entry.company}</p>
                                     <p className="text-caption text-zinc-500 dark:text-zinc-500 mb-4 text-left">{entry.dateRange}</p>

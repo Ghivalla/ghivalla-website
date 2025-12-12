@@ -1,0 +1,43 @@
+{
+  "heading": "Let's start a conversation",
+  "intro": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Whether you have a question or just want to say hello, I'll do my best to get back to you.",
+  "contactReasons": {
+    "title": "What you can reach out for",
+    "items": [
+      "Front-end development (React, Next.js, TypeScript)",
+      "Full-stack web applications",
+      "Performance, SEO & accessibility optimization",
+      "UI/UX implementation & design systems",
+      "Technical consulting or mentorship",
+      "Freelance projects, collaborations, or full-time opportunities"
+    ]
+  },
+  "responseTime": {
+    "title": "Quick response time",
+    "description": "I typically respond within 24 hours. Mention if it's urgent."
+  },
+  "form": {
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "your.email@example.com"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell me about your project or idea..."
+      }
+    },
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "sendAnother": "Send another message"
+  },
+  "messages": {
+    "success": "Thank you for reaching out. I've received your message and will respond soon.",
+    "error": "Something went wrong. Please try again or reach out via email.",
+    "rateLimit": "Too many requests. Please wait a moment before trying again."
+  }
+}

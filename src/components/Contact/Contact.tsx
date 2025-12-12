@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import contactData from "@/data/json/contact.json";
 
 type ContactFormErrors = {
     name?: string;
@@ -95,7 +96,7 @@ export default function Contact() {
                     // Handle different error status codes
                     if (response.status === 429) {
                         // Rate limit error
-                        setStatusMessage(data.message || "Too many requests from this IP, please try again later.");
+                        setStatusMessage(data.message || contactData.messages.rateLimit);
                     } else if (response.status === 400) {
                         // Validation error - parse field-specific errors
                         if (data.errors && Array.isArray(data.errors)) {
@@ -123,11 +124,11 @@ export default function Contact() {
 
                 // Success response (200)
                 console.log("Success:", data);
-                setStatusMessage(data.message || "Message sent successfully");
+                setStatusMessage(data.message || contactData.messages.success);
                 setShowForm(false);
             } catch (error) {
                 console.error("Error:", error);
-                setStatusMessage("Failed to send message. Please try again.");
+                setStatusMessage(contactData.messages.error);
             } finally {
                 setIsSubmitting(false);
             }
@@ -145,7 +146,8 @@ export default function Contact() {
 
     return (
         <section id="contact" className="container mx-auto px-4 py-20">
-            <h2 className="text-h2 text-center mb-16"> Get in Touch </h2>
+            <h2 className="text-h2 text-center mb-16">{contactData.heading}</h2>
+
             {!showForm && statusMessage && (
                 <div className="max-w-2xl mx-auto text-center space-y-6">
                     <div className="p-6 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 rounded-lg">
@@ -157,91 +159,126 @@ export default function Contact() {
                         onClick={handleSendAnotherMessage}
                         className="px-6 py-3 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                     >
-                        send another message
+                        {contactData.form.sendAnother}
                     </button>
                 </div>
             )}
+
             {showForm && (
-                <form className="max-w-2xl mx-auto space-y-6">
-                    <div className="space-y-2">
-                        <label htmlFor="name" className="text-body font-medium">
-                            Name
-                        </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                    {/* Left column - Content */}
+                    <div className="order-1 md:order-1 space-y-8">
+                        <p className="text-body-lg text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                            {contactData.intro}
+                        </p>
+
+                        <div>
+                            <h3 className="text-body-lg font-semibold text-zinc-900 dark:text-white mb-4">
+                                {contactData.contactReasons.title}
+                            </h3>
+                            <ul className="space-y-2">
+                                {contactData.contactReasons.items.map((item, index) => (
+                                    <li key={index} className="text-body text-zinc-700 dark:text-zinc-300 flex items-start">
+                                        <span className="text-blue-500 mr-2">•</span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="p-4 bg-zinc-100 dark:bg-zinc-900 border-l-4 border-blue-500 rounded-lg">
+                            <h3 className="text-body-lg font-semibold text-zinc-900 dark:text-white mb-2">
+                                {contactData.responseTime.title}
+                            </h3>
+                            <p className="text-body text-zinc-700 dark:text-zinc-300">
+                                {contactData.responseTime.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Right column - Form */}
+                    <form className="order-2 md:order-2 space-y-6">
+                        <div className="space-y-2">
+                            <label htmlFor="name" className="text-body font-medium text-zinc-900 dark:text-white">
+                                {contactData.form.fields.name.label}
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={`w-full px-4 py-2 bg-background border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.name ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
+                            />
+                            <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
+                                {errors.name}
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label htmlFor="email" className="text-body font-medium text-zinc-900 dark:text-white">
+                                {contactData.form.fields.email.label}
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={`w-full px-4 py-2 bg-background border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
+                            />
+                            <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
+                                {errors.email}
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label htmlFor="message" className="text-body font-medium text-zinc-900 dark:text-white">
+                                {contactData.form.fields.message.label}
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                className={`w-full px-4 py-2 bg-background border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px] resize-y ${errors.message ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
+                            ></textarea>
+                            <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
+                                {errors.message}
+                            </p>
+                        </div>
+
+                        <button
+                            type="submit"
+                            onClick={handleSubmit}
+                            disabled={isSubmitting}
+                            className="w-full md:w-fit px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        >
+                            {isSubmitting ? contactData.form.submitting : contactData.form.submit}
+                        </button>
+
                         <input
                             type="text"
-                            id="name"
-                            name="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.name ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
+                            name="website"
+                            style={{ display: "none" }}
+                            tabIndex={-1}
+                            autoComplete="off"
+                            value={website}
+                            onChange={(e) => setWebsite(e.target.value)}
+                            aria-label="website"
                         />
-                        <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
-                            {errors.name}
-                        </p>
-                    </div>
-                    <div className="space-y-2">
-                        <label htmlFor="email" className="text-body font-medium">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
-                        />
-                        <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
-                            {errors.email}
-                        </p>
-                    </div>
 
-                    <div className="space-y-2">
-                        <label htmlFor="message" className="text-body font-medium">
-                            Message
-                        </label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px] resize-y ${errors.message ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
-                        ></textarea>
-                        <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
-                            {errors.message}
-                        </p>
-                    </div>
-
-                    <button
-                        type="submit"
-                        onClick={handleSubmit}
-                        disabled={isSubmitting}
-                        className="w-full md:w-fit px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    >
-                        {isSubmitting ? "Sending..." : "Submit"}
-                    </button>
-
-                    <input
-                        type="text"
-                        name="website"
-                        style={{ display: "none" }}
-                        tabIndex={-1}
-                        autoComplete="off"
-                        value={website}
-                        onChange={(e) => setWebsite(e.target.value)}
-                        aria-label="website"
-                    />
-
-                    <div className="min-h-[60px]">
-                        {statusMessage && (
-                            <div
-                                className={`p-4 rounded-lg border-l-4 ${statusMessage.includes("successfully") ? "bg-green-50 dark:bg-green-900/20 border-green-500 text-green-800 dark:text-green-200" : "bg-red-50 dark:bg-red-900/20 border-red-500 text-red-800 dark:text-red-200"}`}
-                            >
-                                <p className="text-body">{statusMessage}</p>
-                            </div>
-                        )}
-                    </div>
-                </form>
+                        <div className="min-h-[60px]">
+                            {statusMessage && (
+                                <div
+                                    className={`p-4 rounded-lg border-l-4 ${statusMessage.includes("successfully") ? "bg-green-50 dark:bg-green-900/20 border-green-500 text-green-800 dark:text-green-200" : "bg-red-50 dark:bg-red-900/20 border-red-500 text-red-800 dark:text-red-200"}`}
+                                >
+                                    <p className="text-body">{statusMessage}</p>
+                                </div>
+                            )}
+                        </div>
+                    </form>
+                </div>
             )}
         </section>
     );

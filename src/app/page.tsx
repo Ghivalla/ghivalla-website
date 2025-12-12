@@ -4,6 +4,7 @@ import TechStack from '@/components/TechStack';
 import About from '@/components/About';
 import Experience from '@/components/Experience';
 import Contact from '@/components/Contact';
+import Projects from '@/components/Projects';
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
                 <Hero />
                 <TechStack />
                 <About />
+                <Projects />
                 <Experience />
                 <Contact />
             </main>

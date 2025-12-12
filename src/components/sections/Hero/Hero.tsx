@@ -24,14 +24,14 @@ export default function Hero() {
                     </p>
 
                     <div className="flex gap-4 justify-center md:justify-start">
-                        {/* <Button */}
-                        {/*     className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-500" */}
-                        {/*     asChild */}
-                        {/* > */}
-                        {/*     <a aria-label="projects" href="#projects"> */}
-                        {/*         View Projects */}
-                        {/*     </a> */}
-                        {/* </Button> */}
+                        <Button
+                            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-500"
+                            asChild
+                        >
+                            <a aria-label="projects" href="#projects">
+                                View Projects
+                            </a>
+                        </Button>
                         <Button
                             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-500"
                             asChild

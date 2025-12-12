@@ -1,0 +1,90 @@
+[
+  {
+    "id": "ghivalla-portfolio",
+    "title": "Ghivalla Portfolio Website",
+    "description": "A full-stack personal portfolio built to showcase my work and provide a professional point of contact for clients and recruiters. The project includes a complete CI/CD pipeline (GitHub → Docker → VPS), advanced UI with React/TypeScript, a secure mailing service using a custom Node.js API powered by Resend, and full test coverage (Vitest, RTL, Playwright). Deployed on a fully configured Ubuntu VPS with Nginx reverse proxy and SSL.",
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Docker",
+      "Nginx",
+      "Vitest",
+      "React Testing Library",
+      "Playwright"
+    ],
+    "image": "/images/projects/portfolio-cover.png",
+    "demoUrl": "https://ghivalla.com",
+    "githubUrl": "https://github.com/Ghivalla/ghivalla-website",
+    "context": "Personal project",
+    "featured": true
+  },
+  {
+    "id": "ronko-removals",
+    "title": "Ronko Removals – London Moving Company Website",
+    "description": "A custom WordPress theme built from scratch for a London-based removal company. I designed and developed the entire theme, implementing custom fields, a bespoke PHP mailing handler, and optimized front-end components with vanilla JavaScript. The website is structured to improve SEO, performance, and conversion rates, while remaining fully editable from the WP admin panel.",
+    "technologies": [
+      "WordPress",
+      "PHP",
+      "HTML5",
+      "CSS3",
+      "Vanilla JavaScript",
+      "ACF"
+    ],
+    "image": "/images/projects/ronko-cover.png",
+    "demoUrl": "https://ronkoremovals.com/",
+    "githubUrl": null,
+    "context": "Freelance client project",
+    "featured": false
+  },
+  {
+    "id": "proxi-slot-game",
+    "title": "Christmas Slot-Machine Game – Proxi TotalEnergies",
+    "description": "A gamified Christmas campaign created for Proxi TotalEnergies during my work at Beyable. I built a slot-machine style game where users spin for a chance to match symbols and win prizes. Developed with optimized vanilla JavaScript and lightweight HTML/CSS for maximum compatibility and fast loading across all devices.",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "Vanilla JavaScript"
+    ],
+    "image": "/images/projects/proxi-slot-game.png",
+    "demoUrl": "https://www.proxi-totalenergies.fr/particuliers/actualites/proxi-totalenergies-met-en-jeu-des-palettes-de-bois-pour-noel",
+    "githubUrl": null,
+    "context": "Built while working at Beyable",
+    "featured": false
+  },
+  {
+    "id": "beyable-extension",
+    "title": "Beyable Extension",
+    "description": "A Chrome extension built with React and TypeScript to help developers and CSM teams debug and test online campaigns directly on client websites. The tool integrates seamlessly into the browser, providing real-time insights into campaign triggers, targeting rules, and delivered variants.",
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Chrome Extension Manifest V3",
+      "Webpack"
+    ],
+    "image": "/images/projects/beyable-extension.png",
+    "demoUrl": null,
+    "githubUrl": null,
+    "context": "Built while working at Beyable",
+    "featured": false,
+    "hide": true
+  },
+  {
+    "id": "graph-patch-extension",
+    "title": "Graph Patch Chrome Extension – Full Refactor",
+    "description": "A major refactor of Beyable's Graph Patch Chrome Extension, a complex tool enabling users to visually modify any website's content and styling directly in the DOM. The extension connects to the Beyable backoffice, synchronizes data, supports element selection, WYSIWYG editing, and campaign insertion. I modernized the entire codebase, improved state management with Redux Toolkit, restructured the architecture, and enhanced developer experience for maintainability and scalability.",
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Redux Toolkit",
+      "Chrome Extension Manifest V3",
+      "Webpack"
+    ],
+    "image": "/images/projects/graph-patch-extension.png",
+    "demoUrl": null,
+    "githubUrl": null,
+    "context": "Built while working at Beyable",
+    "featured": true
+  }
+]

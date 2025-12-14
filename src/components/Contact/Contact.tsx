@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Code2, Rocket, Gauge, Palette, MessageSquare, Briefcase } from "lucide-react";
+import contactData from "@/data/json/contact.json";
 
 type ContactFormErrors = {
     name?: string;
@@ -14,49 +14,27 @@ function ContactInfo() {
         <div className="space-y-8 order-1 lg:order-2">
             <div className="space-y-4">
                 <p className="text-body-lg leading-relaxed">
-                    <strong>Have a project in mind</strong>, a technical challenge to solve, or an opportunity to discuss?
+                    {contactData.intro}
                 </p>
-                <p className="text-body leading-relaxed">
-                    I'm a <strong>Front-End / Full-Stack JavaScript & TypeScript developer</strong> specializing in <em>React</em>, <em>Next.js</em>, <em>performance optimization</em>, and <em>modern UI architectures</em>.
-                </p>
-                <p className="text-body leading-relaxed">
-                    I collaborate with <strong>startups</strong>, <strong>companies</strong>, and <strong>entrepreneurs</strong> to build reliable, scalable, and user-focused web applications, from idea to production.
-                </p>
-                <div className="flex items-center gap-2 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-lg">
-                    <MessageSquare className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                    <p className="text-body-sm font-medium">
-                        I reply fast, usually within <strong>24 hours</strong>.
+                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-lg">
+                    <h3 className="text-body-lg font-semibold mb-2">
+                        {contactData.responseTime.title}
+                    </h3>
+                    <p className="text-body-sm">
+                        {contactData.responseTime.description}
                     </p>
                 </div>
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-h3">What You Can Contact Me For</h3>
-                <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                        <Code2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-body"><strong>Front-end development</strong> (React, Next.js, TypeScript)</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                        <Rocket className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-body"><strong>Full-stack web applications</strong></span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                        <Gauge className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-body"><strong>Performance, SEO & accessibility</strong> optimization</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                        <Palette className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-body"><strong>UI/UX implementation</strong> & design systems</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                        <MessageSquare className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-body"><strong>Technical consulting</strong></span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                        <Briefcase className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-body"><strong>Freelance missions</strong> or full-time opportunities</span>
-                    </li>
+                <h3 className="text-h3">{contactData.contactReasons.title}</h3>
+                <ul className="space-y-2">
+                    {contactData.contactReasons.items.map((item, index) => (
+                        <li key={index} className="text-body flex items-start">
+                            <span className="text-blue-500 mr-2">•</span>
+                            <span>{item}</span>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>
@@ -76,7 +54,7 @@ function SuccessMessage({ message, onSendAnother }: { message: string; onSendAno
                 onClick={onSendAnother}
                 className="w-full md:w-fit px-6 py-3 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >
-                Send Another Message
+                {contactData.form.sendAnother}
             </button>
         </div>
     );
@@ -170,7 +148,7 @@ export default function Contact() {
                     // Handle different error status codes
                     if (response.status === 429) {
                         // Rate limit error
-                        setStatusMessage(data.message || "Too many requests from this IP, please try again later.");
+                        setStatusMessage(data.message || contactData.messages.rateLimit);
                     } else if (response.status === 400) {
                         // Validation error - parse field-specific errors
                         if (data.errors && Array.isArray(data.errors)) {
@@ -198,11 +176,11 @@ export default function Contact() {
 
                 // Success response (200)
                 console.log("Success:", data);
-                setStatusMessage(data.message || "Message sent successfully");
+                setStatusMessage(data.message || contactData.messages.success);
                 setShowForm(false);
             } catch (error) {
                 console.error("Error:", error);
-                setStatusMessage("Failed to send message. Please try again.");
+                setStatusMessage(contactData.messages.error);
             } finally {
                 setIsSubmitting(false);
             }
@@ -220,7 +198,7 @@ export default function Contact() {
 
     return (
         <section id="contact" className="container mx-auto px-4 py-20">
-            <h2 className="text-h2 text-center mb-16">Get in Touch</h2>
+            <h2 className="text-h2 text-center mb-16">{contactData.heading}</h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 max-w-6xl mx-auto">
                 {/* Left: Contact Form or Success Message */}
@@ -232,85 +210,86 @@ export default function Contact() {
                         />
                     ) : (
                         <form className="space-y-6">
-                    <div className="space-y-2">
-                        <label htmlFor="name" className="text-body font-medium">
-                            Name
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.name ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
-                        />
-                        <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
-                            {errors.name}
-                        </p>
-                    </div>
-                    <div className="space-y-2">
-                        <label htmlFor="email" className="text-body font-medium">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
-                        />
-                        <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
-                            {errors.email}
-                        </p>
-                    </div>
-
-                    <div className="space-y-2">
-                        <label htmlFor="message" className="text-body font-medium">
-                            Message
-                        </label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px] resize-y ${errors.message ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
-                        ></textarea>
-                        <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
-                            {errors.message}
-                        </p>
-                    </div>
-
-                    <button
-                        type="submit"
-                        onClick={handleSubmit}
-                        disabled={isSubmitting}
-                        className="w-full md:w-fit px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    >
-                        {isSubmitting ? "Sending..." : "Submit"}
-                    </button>
-
-                    <input
-                        type="text"
-                        name="website"
-                        style={{ display: "none" }}
-                        tabIndex={-1}
-                        autoComplete="off"
-                        value={website}
-                        onChange={(e) => setWebsite(e.target.value)}
-                        aria-label="website"
-                    />
-
-                    <div className="min-h-[60px]">
-                        {statusMessage && (
-                            <div
-                                className={`p-4 rounded-lg border-l-4 ${statusMessage.includes("successfully") ? "bg-green-50 dark:bg-green-900/20 border-green-500 text-green-800 dark:text-green-200" : "bg-red-50 dark:bg-red-900/20 border-red-500 text-red-800 dark:text-red-200"}`}
-                            >
-                                <p className="text-body">{statusMessage}</p>
+                            <div className="space-y-2">
+                                <label htmlFor="name" className="text-body font-medium">
+                                    {contactData.form.fields.name.label}
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className={`w-full px-4 py-2 bg-background border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.name ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
+                                />
+                                <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
+                                    {errors.name}
+                                </p>
                             </div>
-                        )}
-                    </div>
-                </form>
+
+                            <div className="space-y-2">
+                                <label htmlFor="email" className="text-body font-medium">
+                                    {contactData.form.fields.email.label}
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className={`w-full px-4 py-2 bg-background border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
+                                />
+                                <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
+                                    {errors.email}
+                                </p>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label htmlFor="message" className="text-body font-medium">
+                                    {contactData.form.fields.message.label}
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    className={`w-full px-4 py-2 bg-background border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px] resize-y ${errors.message ? "border-red-500 dark:border-red-400" : "border-zinc-300 dark:border-zinc-700"}`}
+                                ></textarea>
+                                <p className="min-h-[20px] text-sm text-red-500 dark:text-red-400">
+                                    {errors.message}
+                                </p>
+                            </div>
+
+                            <button
+                                type="submit"
+                                onClick={handleSubmit}
+                                disabled={isSubmitting}
+                                className="w-full md:w-fit px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                            >
+                                {isSubmitting ? contactData.form.submitting : contactData.form.submit}
+                            </button>
+
+                            <input
+                                type="text"
+                                name="website"
+                                style={{ display: "none" }}
+                                tabIndex={-1}
+                                autoComplete="off"
+                                value={website}
+                                onChange={(e) => setWebsite(e.target.value)}
+                                aria-label="website"
+                            />
+
+                            <div className="min-h-[60px]">
+                                {statusMessage && (
+                                    <div
+                                        className={`p-4 rounded-lg border-l-4 ${statusMessage.includes("successfully") ? "bg-green-50 dark:bg-green-900/20 border-green-500 text-green-800 dark:text-green-200" : "bg-red-50 dark:bg-red-900/20 border-red-500 text-red-800 dark:text-red-200"}`}
+                                    >
+                                        <p className="text-body">{statusMessage}</p>
+                                    </div>
+                                )}
+                            </div>
+                        </form>
                     )}
                 </div>
 
